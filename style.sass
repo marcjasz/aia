@@ -1,0 +1,46 @@
+$font-stack: Helvetica, sans-serif
+$font-size: 16px
+
+// *
+//   border: 1px solid black
+
+body
+  font: $font-size Helvetica
+
+header
+  display: block
+  width: 100%
+
+figure
+  width: 10%
+  display: inline-block
+
+#title
+  font-size: 2*$font-size
+nav
+  display: inline-block
+
+img
+  max-width: 100%
+
+main
+  display: flex
+  flex-flow: row wrap
+  justify-content: space-evenly
+  width: 100%
+
+@media only screen and (min-width: 1024px) 
+  article
+    flex-basis: calc(33.3% - 1.5em)
+
+@media only screen and (min-width: 600px) and (max-width: 1024px) 
+  article
+    flex-basis: calc(50% - 1.5em) 
+
+@media only screen and (max-width: 600px) 
+  article
+    flex-basis: calc(100% - 1.5em) 
+
+footer
+  position: fixed
+  bottom: 0
