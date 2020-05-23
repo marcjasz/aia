@@ -12,13 +12,23 @@ header
   width: 100%
 
 figure
-  width: 10%
+  width: 7em
   display: inline-block
 
 #title
   font-size: 2*$font-size
+
 nav
-  display: inline-block
+  float: right
+  width: 40%
+
+nav ul
+  list-style: none
+  text-align: right
+
+nav ul li
+  float: left
+  margin: 1em
 
 img
   max-width: 100%
@@ -29,17 +39,23 @@ main
   justify-content: space-evenly
   width: 100%
 
+// Desktop
 @media only screen and (min-width: 1024px) 
   article
     flex-basis: calc(33.3% - 1.5em)
 
+// Tablet
 @media only screen and (min-width: 600px) and (max-width: 1024px) 
   article
     flex-basis: calc(50% - 1.5em) 
 
+// Mobile
 @media only screen and (max-width: 600px) 
   article
     flex-basis: calc(100% - 1.5em) 
+  #title
+    visibility: hidden
+
 
 footer
   position: fixed
