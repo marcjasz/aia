@@ -1,9 +1,10 @@
 $font-stack: Helvetica, sans-serif
 $font-size: 16px
 $footer-height: 5em
-
-// *
-//   border: 1px solid black
+$background-color: #F2F3F4
+$border-color: #797D7F 
+$header-colors: #f8c471, #bb8fce, #f1948a, #f7dc6f, #a2e791, #d98880
+$article-header-height: 3em
 
 body
   display: flex
@@ -53,6 +54,35 @@ main
   justify-content: space-evenly
   width: 100%
 
+article
+  box-sizing: border-box
+  margin: 1em 0 0 0
+  border: solid $border-color
+  border-width: 0 2px 2px 0
+  background: $background-color
+  display: flex
+  flex-direction: column
+
+.article-top
+  width: 100%
+  min-height: $article-header-height
+
+@for $i from 1 through length($header-colors) 
+    article:nth-child(#{length($header-colors)}n+#{$i}) > .article-top > .article-header
+        background: nth($header-colors, $i)
+
+.article-header
+  float: right
+  border: 1px solid $border-color
+  padding: 1em
+
+.article-content
+  padding: 0.5em
+  margin: 0.5em 0 0 0 
+
+h3
+  margin: 0
+
 // Desktop
 @media only screen and (min-width: 1024px) 
   article
@@ -83,13 +113,14 @@ main
     display: block
 
 footer
-  height: $footer-height
+  height: $footer-height - 1em
   position: absolute
   bottom: 0
   display: flex
   justify-content: center
   align-items: center
   width: 100%
+  background: $background-color
 
 .footer-text
   margin: 0 auto
