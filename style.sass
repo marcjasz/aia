@@ -1,11 +1,19 @@
 $font-stack: Helvetica, sans-serif
 $font-size: 16px
+$footer-height: 5em
 
 // *
 //   border: 1px solid black
 
 body
+  display: flex
+  flex-direction: column
+  position: relative
   font: $font-size Helvetica
+  box-sizing: border-box
+  min-height: 100vh
+  margin: 0
+  padding-bottom: $footer-height
 
 header
   display: block
@@ -74,7 +82,15 @@ main
   .hamburger
     display: block
 
-
 footer
-  position: fixed
+  height: $footer-height
+  position: absolute
   bottom: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 100%
+
+.footer-text
+  margin: 0 auto
+  display: block
