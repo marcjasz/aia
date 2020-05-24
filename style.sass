@@ -14,24 +14,30 @@ header
 figure
   width: 7em
   display: inline-block
+  margin: 1em
 
 #title
-  font-size: 2*$font-size
+  font-size: 1.75*$font-size
 
 nav
   float: right
-  width: 40%
+  max-width: 40%
+  margin: 1em
 
 nav ul
   list-style: none
   text-align: right
 
 nav ul li
-  float: left
+  float: right
   margin: 1em
 
-img
+.logo
   max-width: 100%
+
+.hamburger
+  width: 3em
+  float: right
 
 main
   display: flex
@@ -43,18 +49,30 @@ main
 @media only screen and (min-width: 1024px) 
   article
     flex-basis: calc(33.3% - 1.5em)
+  ul
+    display: block
+  .hamburger
+    display: none
 
 // Tablet
 @media only screen and (min-width: 600px) and (max-width: 1024px) 
   article
     flex-basis: calc(50% - 1.5em) 
+  ul
+    display: none
+  .hamburger
+    display: block
 
 // Mobile
 @media only screen and (max-width: 600px) 
   article
     flex-basis: calc(100% - 1.5em) 
   #title
-    visibility: hidden
+    display: none
+  ul
+    display: none
+  .hamburger
+    display: block
 
 
 footer
