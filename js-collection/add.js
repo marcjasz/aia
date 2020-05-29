@@ -82,3 +82,30 @@ function addHead(table) {
         thRow.appendChild(th)
     })
 }
+
+function edit(rowId) {
+    let row = document.getElementById(`row-${rowId}`)
+    row.childNodes.forEach((td, index) => {
+        td.childNodes.forEach((input) => {
+            let newInput = input.tagName === 'BUTTON' ? transformButton(input) : transformText(input, index) 
+            td.replaceChild(newInput, input)
+        })
+    })
+}
+
+function transformButton(button) {
+    if(button.innerText === 'Remove')
+        return button
+    
+    button.innerText = 'Save'
+    let onclick = button.getAttribute('onclick')
+    button.setAttribute('onclick', onclick.replace('edit', 'save'))
+    return button
+}
+
+function transformText(input, index) {
+    let fieldProps = Object.assign({}, cells[index][0], { rowId: input.getAttribute('class').split('-')[1] })
+    fieldProps.attributes.set('value', input.innerText)
+    console.log(fieldProps)
+    return buildInput(fieldProps)
+}
