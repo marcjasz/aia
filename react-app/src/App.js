@@ -1,9 +1,12 @@
 import React from 'react';
+import Top from './Top';
+import Main from './Main';
 
 function App() {
   return (
     <div>
-      <h1>Elo</h1>
+      <Top />
+      <Main />
     </div>
   );
 }
