@@ -1,20 +1,43 @@
 import React from 'react'
 
 export default function Row(props) {
-  return (
-    <tr>
-      <td>
-        <input id={props.id} type='text' name='name' onChange={props.handleInput} value={props.name}/>
-      </td>
-      <td>
-        <input id={props.id} type='text' name='type' onChange={props.handleInput} value={props.type}/>
-      </td>
-      <td>
-        <input id={props.id} type='text' name='description' onChange={props.handleInput} value={props.description}/>
-      </td>
-      <td>
-        <input id={props.id} type='number' name='rating' onChange={props.handleInput} value={props.rating}/>
-      </td>
-    </tr>
-  )
+  return props.isActive ? (
+      <tr>
+        <td>
+          <input id={props.id} type='text' name='name' onChange={props.handleInput} value={props.name}/>
+        </td>
+        <td>
+          <input id={props.id} type='text' name='type' onChange={props.handleInput} value={props.type}/>
+        </td>
+        <td>
+          <input id={props.id} type='text' name='description' onChange={props.handleInput} value={props.description}/>
+        </td>
+        <td>
+          <input id={props.id} type='number' name='rating' onChange={props.handleInput} value={props.rating}/>
+        </td>
+        <td>
+          <button id={props.id} name='save' onClick={props.toggleActive}>Save</button>
+          <button id={props.id} name='delete' onClick={props.deleteRecord}>Delete</button>
+        </td>
+      </tr>
+    ) : (
+      <tr>
+        <td>
+          <span id={props.id} name='name'>{props.name}</span>
+        </td>
+        <td>
+          <span id={props.id} name='type'>{props.type}</span>
+        </td>
+        <td>
+          <span id={props.id} name='description'>{props.description}</span>
+        </td>
+        <td>
+          <span id={props.id} name='rating'>{props.rating}</span>
+        </td>
+        <td>
+          <button id={props.id} name='edit' onClick={props.toggleActive}>Edit</button>
+          <button id={props.id} name='delete' onClick={props.deleteRecord}>Delete</button>
+        </td>
+      </tr>
+    )
 }

@@ -26,7 +26,7 @@ export default function Main() {
     })
   }
 
-  const handleInput = (event) => {
+  const handleInput = event => {
     const { name, value, id } = event.target
     setRecords(mapIf({
       update: record => ({ ...record, [name]: value }),
@@ -34,10 +34,23 @@ export default function Main() {
     }))
   }
 
+  const toggleActive = event => {
+    const { id, name } = event.target
+    setRecords(mapIf({
+      update: record => ({ ...record, isActive: name === 'edit'  }),
+      condition: record => record.id === id,
+    }))
+  }
+
+  const deleteRecord = event => {
+    const { id } = event.target
+    setRecords(records => records.filter(record => record.id !== id))
+  }
+
   return (
     <div id='main'>
         <button onClick={handleClick}>Add a new bread</button>
-        { <Table records={records} handleInput={handleInput} />}
+        { <Table records={records} handleInput={handleInput} toggleActive={toggleActive} deleteRecord={deleteRecord}  />}
     </div>
   )
 }
