@@ -10,6 +10,16 @@ td {
     overflow: hidden;
 }
 
+.table-control {
+  display: flex;
+}
+
+.search-bar {
+  height: 1.5em;
+  width: 50%;
+}
+
+
 input {
     background: inherit;
     border: solid #5a3921 1px;

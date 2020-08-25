@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from './Table'
+import Search from './Search'
+const R = require('ramda');
 
 export default function Main() {
+  const SORTABLE_COLUMNS = ['id', 'name', 'type', 'description', 'rating']
   const [records, setRecords] = useState([])
   const [recordsCount, setRecordsCount] = useState(0)
+  const [searchString, setSearchString] = useState('')
+  const [order, setOrder] = useState({
+    column: 'id',
+    ascending: true,
+  })
 
   const newRecord = () => ({
     isActive: true,
+    isVisible: true,
     id: String(recordsCount),
     name: '',
     description: '',
     type: '',
-    value: '',
     rating: '',
   })
 
@@ -20,26 +28,20 @@ export default function Main() {
     setRecordsCount(recordsCount + 1)
   }
 
-  const mapIf = ({ update, condition }) => collection => {
-    return collection.map(element => {
-      return condition(element) ? update(element) : element;
-    })
-  }
-
   const handleInput = event => {
     const { name, value, id } = event.target
-    setRecords(mapIf({
-      update: record => ({ ...record, [name]: value }),
-      condition: record => record.id === id,
-    }))
+    setRecords(records.map(
+      R.when(record => record.id === id,
+             record => ({ ...record, [name]: value}))
+    ))
   }
 
   const toggleActive = event => {
     const { id, name } = event.target
-    setRecords(mapIf({
-      update: record => ({ ...record, isActive: name === 'edit'  }),
-      condition: record => record.id === id,
-    }))
+    setRecords(records.map(
+      R.when(record => record.id === id,
+             record => ({ ...record, isActive: name === 'edit' }))
+      ))
   }
 
   const deleteRecord = event => {
@@ -47,10 +49,47 @@ export default function Main() {
     setRecords(records => records.filter(record => record.id !== id))
   }
 
+  const filterResults = event => {
+    const { value } = event.target
+    setSearchString(value)
+  }
+
+  const handleSorting = event => {
+    const column = SORTABLE_COLUMNS.find(x => x === event.target.innerText.toLowerCase()) || 'id'
+    column === order.column ?
+      setOrder({ column: column, ascending: !order.ascending }) :
+      setOrder({ column: column, ascending: true })
+  }
+
+  useEffect(() => {
+    setRecords(records => records.map(record => ({ ...record, isVisible: record.name.includes(searchString) })))
+  }, [searchString])
+
+  useEffect(() => {
+    R.pipe(
+      R.sortBy(
+        R.pipe(
+          R.prop(order.column),
+          R.when(() => R.includes(order.column, ['id', 'rating']), Number),
+        )
+      ),
+      R.unless(() => order.ascending, R.reverse),
+      R.unless(R.eqBy(R.map(R.prop(order.column)), records), setRecords)
+    )(records)
+  }, [order, records])
+
   return (
     <div id='main'>
+      <div className='table-control'>
         <button onClick={handleClick}>Add a new bread</button>
-        { <Table records={records} handleInput={handleInput} toggleActive={toggleActive} deleteRecord={deleteRecord}  />}
+        <Search records={records} filterResults={filterResults} />
+      </div>
+      { <Table records={records}
+               order={order}
+               handleInput={handleInput}
+               toggleActive={toggleActive}
+               deleteRecord={deleteRecord}
+               handleSorting={handleSorting} /> }
     </div>
   )
 }
