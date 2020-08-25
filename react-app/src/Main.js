@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Table from './Table'
 import Search from './Search'
+import mockData from './mock-data'
 const R = require('ramda');
 
 export default function Main() {
   const SORTABLE_COLUMNS = ['id', 'name', 'type', 'description', 'rating']
-  const [records, setRecords] = useState([])
-  const [recordsCount, setRecordsCount] = useState(0)
+  const [records, setRecords] = useState(mockData)
+  const [recordsCount, setRecordsCount] = useState(mockData.length)
   const [searchString, setSearchString] = useState('')
   const [order, setOrder] = useState({
     column: 'id',
@@ -24,10 +25,12 @@ export default function Main() {
     imgUrl: '',
   })
 
-  const handleClick = () => {
-    setRecords(records.concat([newRecord()]))
+  const addRecord = record => {
+    setRecords(records.concat([record]))
     setRecordsCount(recordsCount + 1)
   }
+
+  const handleClick = () => addRecord(newRecord())
 
   const handleInput = event => {
     const { name, value, id } = event.target

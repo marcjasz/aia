@@ -11,14 +11,20 @@ td {
 }
 
 .table-control {
-  display: flex;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.table-control button {
+  display: inline-block;
+  height: 2em;
 }
 
 .search-bar {
-  height: 1.5em;
+  height: 2em;
   width: 50%;
+  display: inline-block;
 }
-
 
 input {
     background: inherit;

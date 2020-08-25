@@ -26,7 +26,7 @@ export default function Row(props) {
     ) : (
       <tr>
         <td>
-          <img id={props.id} name='imgUrl' src={props.imgUrl} style={{ height: '60px' }}/>
+          <img id={props.id} name='imgUrl' src={props.imgUrl} style={{ width: '60%', display: 'block', margin: 'auto' }}/>
         </td>
         <td>
           <span id={props.id} name='name'>{props.name}</span>
