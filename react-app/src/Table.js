@@ -2,7 +2,7 @@ import React from 'react'
 import Row from './Row'
 
 export default function Table(props) {
-  const COLUMN_HEADERS = ['Name', 'Type', 'Description', 'Rating', 'Actions']
+  const COLUMN_HEADERS = ['Image', 'Name', 'Type', 'Description', 'Rating', 'Actions']
 
   return (
     <div>

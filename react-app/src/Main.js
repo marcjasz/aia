@@ -21,6 +21,7 @@ export default function Main() {
     description: '',
     type: '',
     rating: '',
+    imgUrl: '',
   })
 
   const handleClick = () => {
@@ -55,7 +56,8 @@ export default function Main() {
   }
 
   const handleSorting = event => {
-    const column = SORTABLE_COLUMNS.find(x => x === event.target.innerText.toLowerCase()) || 'id'
+    const column = event.target.innerText.toLowerCase()
+    if(!SORTABLE_COLUMNS.includes(column)) return;
     column === order.column ?
       setOrder({ column: column, ascending: !order.ascending }) :
       setOrder({ column: column, ascending: true })

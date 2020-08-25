@@ -62,13 +62,13 @@ div {
     text-align: center;
 }
 
-img {
+#img-box img {
     display: block;
     margin: auto;
     width: 25%;
 }
 
-img:hover {
+#img-box img:hover {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
